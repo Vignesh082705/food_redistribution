@@ -1,0 +1,415 @@
+     [
+        {
+            "question": "Hi",
+            "answer": "Hello! How can I help you today ?"
+        },
+        {
+            "question": "How are you ?",
+            "answer": "I'm just a chatbot, but I'm feeling ready to assist you!"
+        },
+        {
+            "question": "Hello ?",
+            "answer": "Hello! 😊 Welcome to our food redistribution platform. We connect donors, recipients, and volunteers to reduce food waste and help those in need"
+          },      
+        {
+            "question": "Who are you ?",
+            "answer": "I'm your friendly support chatbot, here to guide you through our food donation platform."
+        },
+        {
+            "question": "What can you do ?",
+            "answer": "I can help you understand how to donate food, request food, become a volunteer, and answer all your questions about our platform."
+        },
+        {
+            "question": "What is this platform about ?",
+            "answer": "This platform connects donors, recipients, and volunteers to reduce food waste and provide food to those in need."
+        },
+        {
+            "question": "Can I talk to a human ?",
+            "answer": "Sure! You can contact our support team if you need personal assistance."
+        },
+        {
+            "question": "What is surplus food ?",
+            "answer": "Surplus food refers to extra or leftover food that is safe to eat but may go to waste if not used."
+        },
+        {
+            "question": "Can anyone donate food ?",
+            "answer": "Yes! Individuals, restaurants, events, and even businesses can donate food through our platform."
+        },
+        {
+            "question": "Who are recipients ?",
+            "answer": "Recipients are people or organizations who need food, such as families, orphanages, old age homes, and shelters."
+        },
+        {
+            "question": "What do volunteers do ?",
+            "answer": "Volunteers help in transporting food, spreading awareness, and supporting donors and recipients."
+        },
+        {
+            "question": "How to donate food ?",
+            "answer": "Simply log in as a donor, fill in the food details, select the quantity, and choose a nearby recipient or charity."
+        },
+        {
+            "question": "Can I donate cooked food ?",
+            "answer": "Yes, but the food must be fresh and safe to eat."
+        },
+        {
+            "question": "Is there any minimum quantity for donation ?",
+            "answer": "No, every donation counts, whether it\u2019s a small meal or a large one."
+        },
+        {
+            "question": "Can I schedule a pickup ?",
+            "answer": "Yes! Volunteers can help if you cannot drop off the food."
+        },
+        {
+            "question": "What happens after I donate ?",
+            "answer": "Recipients or volunteers will be notified to collect the food."
+        },
+        {
+            "question": "How to request food ?",
+            "answer": "Log in as a recipient, enter your food requirements, and nearby donors will see your request."
+        },
+        {
+            "question": "Is this service free ?",
+            "answer": "Yes, the food is donated for free."
+        },
+        {
+            "question": "Can organizations like orphanages register ?",
+            "answer": "Absolutely! Institutions can sign up as recipients."
+        },
+        {
+            "question": "What kind of food can we receive ?",
+            "answer": "Both cooked and uncooked food, as long as it is safe for consumption."
+        },
+        {
+            "question": "How will we be notified about food donations ?",
+            "answer": "You will get real-time notifications when a donor near you offers food."
+        },
+        {
+            "question": "How to become a volunteer ?",
+            "answer": "Just sign up as a volunteer and select the areas where you can help."
+        },
+        {
+            "question": "What tasks do volunteers do ?",
+            "answer": "Volunteers transport food, verify food safety, and assist donors and recipients."
+        },
+        {
+            "question": "Can I volunteer part-time ?",
+            "answer": "Yes! You can choose your availability."
+        },
+        {
+            "question": "Will volunteers get certificates ?",
+            "answer": "Yes, regular volunteers will receive appreciation certificates."
+        },
+        {
+            "question": "Is training provided ?",
+            "answer": "Basic guidelines will be given when you sign up."
+        },
+        {
+            "question": "Is this platform available 24/7 ?",
+            "answer": "Yes, the platform works round the clock."
+        },
+        {
+            "question": "Can I track my donations ?",
+            "answer": "Yes, every donation has a history log."
+        },
+        {
+            "question": "Is my personal data safe ?",
+            "answer": "Absolutely! We follow strict privacy policies."
+        },
+        {
+            "question": "What if the food is not collected on time ?",
+            "answer": "Our system will auto-alert nearby volunteers."
+        },
+        {
+            "question": "Can I cancel a donation after posting it ?",
+            "answer": "Yes, you can cancel if the food is not picked up yet."
+        },
+        {
+            "question": "How do you ensure food safety ?",
+            "answer": "Donors must follow hygiene guidelines, and volunteers also check food quality during pickup."
+        },
+        {
+            "question": "Can I donate food past its expiry date ?",
+            "answer": "No, only fresh and safe food is accepted."
+        },
+        {
+            "question": "Do you accept packaged food ?",
+            "answer": "Yes, if it is sealed and within expiry."
+        },
+        {
+            "question": "What types of food are not accepted ?",
+            "answer": "Alcohol, tobacco, and spoiled food are strictly not accepted."
+        },
+        {
+            "question": "Do you check food temperature ?",
+            "answer": "Yes, especially for cooked food."
+        },
+        {
+            "question": "I forgot my password. What to do ?",
+            "answer": "Use the 'Forgot Password' option on the login page."
+        },
+        {
+            "question": "I can\u2019t log in. Help !",
+            "answer": "Make sure you\u2019re using the right role (donor/recipient/volunteer) and check your credentials."
+        },
+        {
+            "question": "Is there a mobile app ?",
+            "answer": "Currently, we support a web app, but a mobile app is coming soon."
+        },
+        {
+            "question": "Can I change my role after signing up ?",
+            "answer": "No, you need to create a new account for a different role."
+        },
+        {
+            "question": "Do I need GPS enabled ?",
+            "answer": "Yes, location helps match you with nearby users."
+        },
+        {
+            "question": "How do I contact support ?",
+            "answer": "You can Contact our support Team via contact pagei"
+        },
+        {
+            "question": "What should I do if donated food is spoiled ?",
+            "answer": "Donot Consume it and dispose of it safely.Report the issue to platfor via feedback section"
+        },
+        {
+            "question": "What type of notifications do donors get ?",
+            "answer": "Donors get notifications when someone requests their food, when a volunteer is assigned for pickup, and when their donation is successfully received."
+          },
+          {
+            "question": "What type of notifications do recipients get ?",
+            "answer": "Recipients get notifications when new food is available, when a donor accepts their request, and when their request is confirmed for pickup."
+          },
+          {
+            "question": "What type of notifications do volunteers get ?",
+            "answer": "Volunteers get notifications when they are assigned a food pickup, when the pickup time is updated, and when a delivery is completed."
+          },
+          {
+            "question": "What happens if there are donations available but no recipients ?",
+            "answer": "If no recipients claim a donation, it may be given to a local charity, stored for later, or safely disposed of if perishable."
+          },
+        {
+            "question": "Can a donor directly give food to a recipient ?",
+            "answer": "yes, Can a donor directly give food to a recipient"
+        },
+        {
+            "question": "Is there a feedback system ?",
+            "answer": "The feedback System are exist ,that system vary based on the role"
+        },
+        {
+            "question": "Can recipients rate the food they receive ?",
+            "answer": "its important,its only check the food quality"
+        },
+        {
+            "question": "How are volunteers verified ?",
+            "answer": "Email verification and detailes verification"
+        },
+        {
+            "question": "Can I delete my account ?",
+            "answer": "you Can  delete your account anytime,the delete account feature is available in profile"
+        },
+        {
+            "question": "Can recipients request specific food items ?",
+            "answer": "yes,its possible"
+        },
+        {
+            "question": "Is there a donation history page ?",
+            "answer": "This is the answer to: Is there a donation history page?"
+        },
+        {
+            "question": "What if a recipient misuses the food ?",
+            "answer": "How can you say the receipient misuse"
+        },
+        {
+            "question": "How can I report issues with donations ?",
+            "answer": "via feedback form or contact our team"
+        },
+        {
+            "question": "Are volunteers paid ?",
+            "answer": "No,its cost free Platform"
+        },
+        {
+            "question": "How do you prevent food wastage ?",
+            "answer": "Donate to needy"
+        },
+        {
+            "question": "Can I become both donor and volunteer ?",
+            "answer": "no one account have only one role,if you want to deliver the food you can deliver directly"
+        },
+        {
+            "question": "What areas does the platform cover ?",
+            "answer": "All the areas"
+        },
+        {
+            "question": "Can donors set food pickup timing ?",
+            "answer": "Its important ,the Donor should must be set  a time"
+        },
+        {
+            "question": "Can schools and colleges register ?",
+            "answer": "its not possible,its connect the Donor and charity ,if the school or college are have surplus food they want to signup as organization Donor inthes type you must give your orgaization name "
+        },
+        {
+            "question": "How can restaurants use this platform ?",
+            "answer": "Restarants signup as Donor,in donor signup ,they enter the restaurant name"
+        },
+        {
+            "question": "What is the average response time for requests ?",
+            "answer": "1hour later of the foodtime(breakfast,lunch,dinner)"
+        },
+        {
+            "question": "Is emergency food donation possible ?",
+            "answer": "yes"
+        },
+        {
+            "question": "Do you work with local government ?",
+            "answer": "What you meant by Local government"
+        },
+        {
+            "question": "What languages does the platform support ?",
+            "answer": "its support the English-India,Now you asked the question in which language"
+        },
+        {
+            "question": "Can NGOs become recipients ?",
+            "answer": "yah yes but that NGOs must signup with there ID"
+        },
+        {
+            "question": "Is there any donation limit ?",
+            "answer": "there is no limits to donation but donate the quality food"
+        },
+        
+        {
+            "question": "Is there a map view for donation locations ?",
+            "answer": "The feature is available"
+        },
+        {
+            "question": "Can I refer my friends to volunteer ?",
+            "answer": "Yes"
+        },
+        {
+            "question": "Do you have awareness programs ?",
+            "answer": "Monthly one awarness programes are contucted"
+        },
+        {
+            "question": "Are expired items automatically rejected ?",
+            "answer": "That feature is Coming soon..."
+        },
+        {
+            "question": "Is there an expiry check feature ?",
+            "answer": "after one day of Donate the food is consider as Expired,automatic expiry check features is coming soon..."
+        },
+        {
+            "question": "How can I update my profile ?",
+            "answer": "You can edit the profile info ,the email and role are non editable"
+        },
+        {
+            "question": "What if my area has no volunteers ?",
+            "answer": "The recipient have to take the food or the Donor give the food directly to charity"
+        },
+        {
+            "question": "Can volunteers earn badges ?",
+            "answer": "volunteers earn points"
+        },
+        {
+            "question": "What if I want to donate regularly ?",
+            "answer": "you can Donate regularly , give a Donate request daily or contact the charity because its a surplus food donation platform not  food donation platform"
+        },
+        {
+            "question": "Do you promote zero food waste campaigns ?",
+            "answer": "yes absolutely,our goal is reduce the food waste"
+        },
+        {
+            "question": "Can donors see recipient profiles ?",
+            "answer": "Yes,Donors can see details of recipient"
+        },
+        {
+            "question": "What makes this platform unique ?",
+            "answer": "This platform connect the local donor and receipient"
+        },
+        {
+            "question": "How can local vendors participate ?",
+            "answer": "Signup with the role like Donor,Volunteeror charity"
+        },
+        {
+            "question": "Do you work with food delivery apps ?",
+            "answer": "No we are not worked with food delivery app ,our delivery partners are Volunteers"
+        },
+        {
+            "question": "What is restricted food ?",
+            "answer": "Restricted food refers to items that cannot be donated due to safety, hygiene, or legal reasons, such as expired food, alcohol, or unsealed perishable items."
+        },
+        {
+            "question": "How many actors are involved in the platform ?",
+            "answer": "The platform includes four main actors: donors, recipients, volunteers, and administrators, each playing a vital role in food distribution."
+        },
+        {
+            "question": "How can I donate ?",
+            "answer": "To donate food, sign up as a donor, list your available food items, select a location, and confirm the donation."
+        },
+        {
+            "question": "How can I request food ?",
+            "answer": "To request food, create an account as a recipient, browse available donations, and submit a request for the items you need."
+        },
+        {
+            "question": "How can I volunteer ?",
+            "answer": "To volunteer, register on the platform and choose tasks such as food collection, delivery, or coordination."
+        },
+        {
+            "question": "What are the rules for using the platform ?",
+            "answer": "Users must provide accurate information, follow food safety guidelines, and respect the platform\u2019s policies to ensure a smooth experience."
+        },
+        {
+            "question": "Who is responsible for food quality ?",
+            "answer": "Donors are responsible for providing safe and hygienic food. Volunteers may assist in checking quality, and recipients should report any issues."
+        },
+        {
+            "question": "How is food quality ensured ?",
+            "answer": "Food quality is ensured by allowing only sealed, fresh, and properly stored food donations. Reports of bad food are reviewed and addressed."
+        },
+        {
+            "question": "What are the available donation times ?",
+            "answer": "Donors can specify their availability while listing a donation. Recipients can check and request food during these time slots."
+        },
+        {
+            "question": "What happens if there are donations available but no recipients ?",
+            "answer": "If no recipients claim a donation, it may be redirected to local charities, stored for later distribution, or disposed of safely if perishable."
+        },
+        {
+            "question": "Can I donate cooked food ?",
+            "answer": "Yes, but it must be fresh and properly packed."
+        },
+        {
+            "question": "Can I donate raw food ?",
+            "answer": "Yes, you can donate raw food items like rice, vegetables, and grains."
+        },
+        {
+            "question": "Is there a fee for using this platform ?",
+            "answer": "No, the platform is completely free to use."
+        },
+        {
+            "question": "Can I cancel my donation ?",
+            "answer": "Yes, you can cancel a donation before it is picked up."
+        },
+        {
+            "question": "Can I change my location ?",
+            "answer": "Yes, you can update your location in your profile settings."
+        },
+        {
+            "question": "How do I contact support ?",
+            "answer": "You can contact support via the help section in your profile."
+        },
+        {
+            "question": "Is my personal information safe ?",
+            "answer": "Yes, we prioritize user privacy and data security."
+        },
+        {
+            "question": "How do I know if my request is accepted ?",
+            "answer": "You will receive a notification once a donor accepts your request."
+        },
+        {
+            "question": "What happens if no one donates to my request  ?",
+            "answer": "Your request will remain active until it expires or is manually removed."
+        },
+        {
+            "question": "Can I donate food to a specific person ?",
+            "answer": "Yes, you can choose to donate to a specific recipient."
+        }
+    ]
