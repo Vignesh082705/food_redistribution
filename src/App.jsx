@@ -6,7 +6,7 @@ import Donate from "./Pages/Public/Donate";
 import Request from "./Pages/Public/Request";
 import Volunteer from "./Pages/Public/Volunteer";
 import Contact from "./Pages/Public/Contact";
-import SignUp from "./Pages/Public/Signup";
+import SignUp from "./Pages/Public/SignUp";
 import Login from "./Pages/Public/Login";
 import Profile from "./Pages/Private/Profile";
 import ForgotPass from "./Components/ForgotPass";
