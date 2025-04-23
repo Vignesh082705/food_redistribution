@@ -250,7 +250,6 @@ const VolunteerTasks = () => {
   
       // 3. Update donation status
       await update(ref(db, `donations/${donationId}`), {
-        acceptedBy: volunteerId,
         status: "In Progress",
       });
   
@@ -768,7 +767,7 @@ const VolunteerTasks = () => {
                   Pickup Confirmed
                 </button>
               )}
-              {item.pickupRequests && item.pickupRequests[auth.currentUser?.uid]?.status === "On the way" && (
+              {item.pickupRequests && item.pickupRequests[auth.currentUser?.uid]?.status === "Picked Up" && (
                 <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded" onClick={() => foodDelivered(item.id, auth.currentUser?.uid)}>
                   Delivered
                 </button>

@@ -417,7 +417,7 @@ const confirmReceived = async (donationId, recipientId) => {
       const donationData = snapshot.val();
   
       // ✅ Get volunteer ID from donation data
-      const volunteerId = donationData.acceptedBy;
+      const volunteerId = donationData.acceptedBy?.userId;
       console.log(volunteerId);
   
       if (!volunteerId) {
@@ -427,8 +427,8 @@ const confirmReceived = async (donationId, recipientId) => {
   
       // ✅ Update donation & volunteer status
       const updates = {};
-      updates[`donations/${donationId}/status`] = "On the way";
-      updates[`donations/${donationId}/volunteers/${volunteerId}/status`] = "On the way";
+      updates[`donations/${donationId}/status`] = "Delivered";
+      updates[`donations/${donationId}/volunteers/${volunteerId}/status`] = "Delivered";
   
       await update(ref(database), updates);
   
@@ -539,7 +539,7 @@ const confirmReceived = async (donationId, recipientId) => {
                   Accept and Deliver Now
                 </button>
               )}
-              {donation.status === "Picked Up" && (
+              {donation.status === "Picked Up" && donation.acceptedBy && (
                 <button
                   onClick={() => Pickedbyvolunteer(donation.id,donation.recipientId)}
                   className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
