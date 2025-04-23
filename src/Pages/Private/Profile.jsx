@@ -460,7 +460,7 @@ const Profile = () => {
       </>
     )}
 
-<div className="flex flex-col sm:flex-row sm:justify-between mb-2">
+<div className="flex justify-between mb-2">
   <strong className="mb-1 sm:mb-0">📧Email:</strong>
   <span className="break-words sm:text-right">{userData.email || "Not provided"}</span>
 </div>

@@ -250,6 +250,7 @@ const VolunteerTasks = () => {
   
       // 3. Update donation status
       await update(ref(db, `donations/${donationId}`), {
+        acceptedBy: volunteerId,
         status: "In Progress",
       });
   
