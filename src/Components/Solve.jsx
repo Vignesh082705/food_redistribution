@@ -1,9 +1,12 @@
 import React from 'react';
+import food from "../assets/food.jpg";
+import request from "../assets/request.jpg";
+import volunteer2 from "../assets/volunteer2.jpg";
 
 const Solve = () => {
   const cardData = [
     {
-      image: "/src/assets/food.jpg",
+      image: food,
       borderColor: 'border-pink-300',
       hoverTextColor: 'text-pink-500',
       title: 'Effectively Reducing Surplus Food Waste Globally',
@@ -13,7 +16,7 @@ const Solve = () => {
       ],
     },
     {
-      image: "/src/assets/request.jpg",
+      image: request,
       borderColor: 'border-orange-300',
       hoverTextColor: 'text-yellow-500',
       title: 'Provides Timely Access to Food for the Needy',
@@ -23,7 +26,7 @@ const Solve = () => {
       ],
     },
     {
-      image: "/src/assets/volunteer2.jpg",
+      image: volunteer2,
       borderColor: 'border-blue-300',
       hoverTextColor: 'text-blue-500',
       title: 'Encourages a Sustainable and Charitable Society',

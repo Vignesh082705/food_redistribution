@@ -1,5 +1,8 @@
 import React from "react";
 import { HiOutlineCheckCircle } from "react-icons/hi"; // Updated tick mark icon
+import donation from "../assets/donation.jpg";
+import charity from "../assets/charity.jpg";
+import volunteer from "../assets/volunteer.jpg";
 
 // Reusable Card Component
 const Card = ({ title, image, alt, description, points }) => (
@@ -41,7 +44,7 @@ const Howitworks = () => {
   const cardData = [
     {
       title: "Donor",
-      image: "/src/assets/donation.jpg",
+      image: donation,
       alt: "Donor providing food",
       description: "Share your surplus food with those in need. Help reduce waste and make a difference in your community.",
       points: [
@@ -51,7 +54,7 @@ const Howitworks = () => {
     },
     {
       title: "Recipient",
-      image: "/src/assets/charity.jpg",
+      image: charity,
       alt: "Recipient receiving food",
       description: "Request food from nearby donors or charities and get timely support when in need.",
       points: [
@@ -61,7 +64,7 @@ const Howitworks = () => {
     },
     {
       title: "Volunteer",
-      image: "/src/assets/volunteer.jpg",
+      image: volunteer,
       alt: "Volunteer distributing food",
       description: "Assist in redistributing food and make a meaningful impact in your community by helping those in need.",
       points: [
