@@ -523,7 +523,15 @@ const confirmReceived = async (donationId, recipientId) => {
                       <p><strong>Charity Reg No:</strong> {recipients?.[donation.recipientId]?.charityRegNo}</p>
                     </div>
                   )}
-              {(donation.status === "Accepted" && donation.handleDelivery) || donation.status==="Volunteer Rejected" && (
+              {donation.status === "Accepted" && donation.handleDelivery && (
+                <button
+                  onClick={() => handleDelivery(donation.id,donation.recipientId)}
+                  className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Accept and Deliver Now
+                </button>
+              )}
+              {( donation.status ==="Volunteer Rejected") && (
                 <button
                   onClick={() => handleDelivery(donation.id,donation.recipientId)}
                   className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
