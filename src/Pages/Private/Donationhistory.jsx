@@ -449,6 +449,73 @@ const confirmReceived = async (donationId, recipientId) => {
     }
   };  
 
+const PickedbyvolunteerD = async (donationId, recipientId) => {
+
+  try {
+    // 🔹 Confirm from the user
+    const confirmResult = await Swal.fire({
+      title: "Confirm Pickup?",
+      text: "Are you sure the food has been picked up by the volunteer?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Confirm",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmResult.isConfirmed) {
+      return;
+    }
+
+    // 🔹 Get donation data
+    const donationRef = ref(database, `donations/${donationId}`);
+    const donationSnapshot = await get(donationRef);
+    if (!donationSnapshot.exists()) {
+      Swal.fire("Error", "Donation not found!", "error");
+      return;
+    }
+    const donationData = donationSnapshot.val();
+    const pickupRequests = donationData.pickupRequests || {};
+    let volunteerId = null;
+
+    for (const [key, value] of Object.entries(pickupRequests)) {
+      if (value.status === "Accepted") {
+        volunteerId = key;
+        break;
+      }
+    }
+
+    // 🔹 Update donation status to Picked by Volunteer
+    await update(donationRef, {
+      status: "Picked by Volunteer"
+    });
+
+    // 🔹 Notify Recipient
+    await push(ref(database, `notifications/recipients/${recipientId}`), {
+      type: "donation",
+      message: "🎉 Your food has been picked up by a volunteer. It will be delivered soon!",
+      donationId,
+      createdAt: Date.now(),
+      read: false,
+    });
+
+    // 🔹 Notify Volunteer (if assigned)
+    if (volunteerId) {
+      await push(ref(database, `notifications/volunteers/${volunteerId}`), {
+        type: "donation",
+        message: "🚚 Please proceed to deliver the food to the recipient.",
+        donationId,
+        createdAt: Date.now(),
+        read: false,
+      });
+    }
+
+    Swal.fire("Success", "Status updated and notifications sent!", "success");
+  } catch (error) {
+    console.error("Error confirming pickup:", error);
+    Swal.fire("Error", "Something went wrong while confirming the pickup.", "error");
+  }
+};
+
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold text-center mb-6 text-[#DE3163]">My Donations</h2>
@@ -542,6 +609,14 @@ const confirmReceived = async (donationId, recipientId) => {
               {donation.status === "Picked Up" && donation.acceptedBy && (
                 <button
                   onClick={() => Pickedbyvolunteer(donation.id,donation.recipientId)}
+                  className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Food is Picked by Volunteer
+                </button>
+              )}
+              {donation.status === "Picked Up" && (
+                <button
+                  onClick={() => PickedbyvolunteerD(donation.id,donation.recipientId)}
                   className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
                   Food is Picked by Volunteer
