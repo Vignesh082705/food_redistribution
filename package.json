@@ -29,6 +29,7 @@
     "framer-motion": "^12.4.7",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.477.0",
+    "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
