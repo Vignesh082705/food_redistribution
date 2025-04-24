@@ -477,11 +477,12 @@ const PickedbyvolunteerD = async (donationId, recipientId) => {
     let volunteerId = null;
 
     for (const [key, value] of Object.entries(pickupRequests)) {
-      if (value.status === "Accepted") {
+      if (value.status === "Picked Up") {
         volunteerId = key;
         break;
       }
     }
+    console.log(volunteerId);
 
     // 🔹 Update donation status to Picked by Volunteer
     await update(donationRef, {
