@@ -66,74 +66,38 @@ const VolunteerTasks = () => {
     const db = getDatabase();
     const donationsRef = ref(db, "donations");
   
-    const getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * (Math.PI / 180);
-      const dLon = (lon2 - lon1) * (Math.PI / 180);
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * (Math.PI / 180)) *
-          Math.cos(lat2 * (Math.PI / 180)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      return R * c;
-    };
+    const unsubscribe = onValue(donationsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const allDonations = snapshot.val();
+        let pendingTasks = [];
   
-    navigator.geolocation.getCurrentPosition((position) => {
-      const volunteerLat = position.coords.latitude;
-      const volunteerLon = position.coords.longitude;
+        Object.keys(allDonations).forEach((donationId) => {
+          const donation = allDonations[donationId];
+          const currentVolunteerStatus = donation.pickupRequests?.[auth.currentUser?.uid];
+
+          if (currentVolunteerStatus?.status === "Rejected") return;
+
+          const anyVolunteerAccepted = Object.values(donation.pickupRequests || {}).some(
+            (req) => req?.status === "Accepted"
+          );
+          const currentVolunteerAccepted = currentVolunteerStatus?.status === "Accepted";
   
-      const unsubscribe = onValue(donationsRef, (snapshot) => {
-        if (snapshot.exists()) {
-          const allDonations = snapshot.val();
-          let pendingTasks = [];
+          const showToThisVolunteer = !anyVolunteerAccepted || currentVolunteerAccepted;
   
-          Object.keys(allDonations).forEach((donationId) => {
-            const donation = allDonations[donationId];
-            const currentVolunteerStatus = donation.pickupRequests?.[auth.currentUser?.uid];
+          if (currentVolunteerStatus && showToThisVolunteer) {
+            pendingTasks.push({ id: donationId, ...donation });
+          }
+        });
   
-            if (currentVolunteerStatus?.status === "Rejected") return;
-  
-            const anyVolunteerAccepted = Object.values(donation.pickupRequests || {}).some(
-              (req) => req?.status === "Accepted"
-            );
-            const currentVolunteerAccepted = currentVolunteerStatus?.status === "Accepted";
-  
-            const showToThisVolunteer = !anyVolunteerAccepted || currentVolunteerAccepted;
-  
-            const donationLat = donation.latitude;
-            const donationLon = donation.longitude;
-  
-            if (
-              donationLat != null &&
-              donationLon != null &&
-              showToThisVolunteer
-            ) {
-              const distance = getDistanceFromLatLonInKm(
-                volunteerLat,
-                volunteerLon,
-                donationLat,
-                donationLon
-              );
-  
-              if (distance <= 5) {
-                pendingTasks.push({ id: donationId, ...donation });
-              }
-            }
-          });
-  
-          pendingTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          setTasks(pendingTasks);
-        }
-      });
-  
-      return () => unsubscribe();
-    }, (error) => {
-      console.error("Location error: ", error);
-      Swal.fire("Location Error", "Please allow location access to filter nearby donations.", "error");
+        // ✅ Sort tasks by date descending
+        pendingTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        
+        setTasks(pendingTasks);
+      }
     });
-  }, []);    
+    
+    return () => unsubscribe(); // Cleanup listener when component unmounts
+  }, []);  
   
 
   const getAddressFromCoords = async (lat, lon) => {

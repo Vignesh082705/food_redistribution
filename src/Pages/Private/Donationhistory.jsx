@@ -450,7 +450,6 @@ const confirmReceived = async (donationId, recipientId) => {
   };  
 
 const PickedbyvolunteerD = async (donationId, recipientId) => {
-
   try {
     // 🔹 Confirm from the user
     const confirmResult = await Swal.fire({
