@@ -143,45 +143,79 @@ function FindFood() {
     return R * c; // Distance in km
   }
 
-  const requestVolunteerHelp = async (donationId,recipientId) => {
-    const db = getDatabase();
-    
-    try {
-      const confirmResult = await Swal.fire({
-        title: "Request Volunteer Help?",
-        text: "Are you sure you want to request a volunteer to pick up the donation?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes, request help",
-        cancelButtonText: "Cancel",
-      });
-      if (!confirmResult.isConfirmed) {
-        console.log("❌ Volunteer request canceled by user.");
-        return;
-      }
-      const recipientSnapshot = await get(ref(database, `recipient/${recipientId}`));
-      const recipientData = recipientSnapshot.val();
-      // 🔹 1. Get donor's location from Firebase
-      const donationRef = ref(db, `donations/${donationId}`);
-      const donationSnapshot = await get(donationRef);
-      if (!donationSnapshot.exists()) {
-        alert("Donor location not found!");
-        return;
-      }
-      
-      const donationData = donationSnapshot.val();
-    const donorId = donationData.userId; // Get donor ID from donation data
+  const requestVolunteerHelp = async (donationId, recipientId) => {
+  const db = getDatabase();
 
-    
-    const updates = {
-      status: "Accepted", // ✅ Store status separately
-      recipientId,  // ✅ Store recipient ID
-      [`recipients/${recipientId}/status`]: "Accepted", // ✅ Store recipient status inside recipients
-      [`recipients/${recipientId}/location`]: {  
-        latitude: recipientData.lat,  // ✅ Store recipient's latitude
-        longitude: recipientData.lon  // ✅ Store recipient's longitude
+  try {
+    // 🔹 Step 1: Get donation details
+    const donationSnapshot = await get(ref(db, `donations/${donationId}`));
+    if (!donationSnapshot.exists()) {
+      Swal.fire("Oops!", "Donation not found!", "error");
+      return;
     }
-  };
+    const donationData = donationSnapshot.val();
+    const donorId = donationData.userId;
+    const donorLat = donationData.latitude;
+    const donorLng = donationData.longitude;
+
+    if (!donorLat || !donorLng) {
+      Swal.fire("Oops!", "Donor location not available!", "error");
+      return;
+    }
+
+    // 🔹 Step 2: Check for nearby volunteers FIRST
+    const volunteersSnapshot = await get(ref(db, "volunteer"));
+    let nearbyVolunteers = [];
+
+    if (volunteersSnapshot.exists()) {
+      volunteersSnapshot.forEach((childSnapshot) => {
+        const volunteerData = childSnapshot.val();
+        if (volunteerData.lat && volunteerData.lon) {
+          const distance = getDistance(donorLat, donorLng, volunteerData.lat, volunteerData.lon);
+          if (distance <= 5) {
+            nearbyVolunteers.push({
+              id: childSnapshot.key,
+              ...volunteerData,
+            });
+          }
+        }
+      });
+    }
+
+    if (nearbyVolunteers.length === 0) {
+      Swal.fire("No Nearby Volunteers", "No volunteers available within 5 km radius.", "info");
+      return;
+    }
+
+    // 🔹 Step 3: Confirm with Recipient
+    const confirmResult = await Swal.fire({
+      title: "Request Volunteer Help?",
+      text: "Nearby volunteers found. Do you want to request help?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, request help",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmResult.isConfirmed) {
+      console.log("❌ Volunteer request canceled by user.");
+      return;
+    }
+
+    // 🔹 Step 4: Get Recipient Details
+    const recipientSnapshot = await get(ref(db, `recipient/${recipientId}`));
+    const recipientData = recipientSnapshot.val();
+
+    // 🔹 Step 5: Update donation with recipient
+    const updates = {
+      status: "Accepted",
+      recipientId,
+      [`recipients/${recipientId}/status`]: "Accepted",
+      [`recipients/${recipientId}/location`]: {
+        latitude: recipientData.lat,
+        longitude: recipientData.lon,
+      },
+    };
 
     let affectedRecipients = {};
     Object.keys(donationData.recipients).forEach((otherRecipientId) => {
@@ -191,96 +225,55 @@ function FindFood() {
       }
     });
 
-    await update(donationRef, updates);
-    console.log("✅ Donation Accepted & Updated!");
+    await update(ref(db, `donations/${donationId}`), updates);
+    notifyOtherRecipients(donationId, affectedRecipients);
 
-    // 🔹 3. Notify Donor
+    // 🔹 Step 6: Notify Donor & Recipient
     await push(ref(db, `notifications/donors/${donorId}`), {
       message: "A recipient has accepted your food donation! A volunteer will pick it up soon.",
       donationId,
-      type:"donation",
+      type: "donation",
       createdAt: Date.now(),
       read: false,
     });
 
     await push(ref(db, `notifications/recipients/${recipientId}`), {
-      message: "Your request to the volunteer is notified successfully...they will confirmed Soon..",
+      message: "Your request has been accepted. Volunteers have been notified!",
       donationId,
-      type:"donation",
+      type: "donation",
       createdAt: Date.now(),
       read: false,
     });
-    console.log("✅ Notification Sent to Donor!");
-    notifyOtherRecipients(donationId, affectedRecipients);
 
-    // 🔹 2. Fetch donor's location
-    const donorSnapshot = await get(ref(db, `donor/${donorId}`));
-    if (!donorSnapshot.exists()) {
-      Swal.fire("Oops!", "Donor location not found!", "error");
-      return;
-    }
-
-    const donorData = donorSnapshot.val();
-    const { lat: donorLat, lon: donorLng } = donorData; 
-  
-      // 🔹 2. Fetch all volunteers and find nearby ones
-      const volunteersSnapshot = await get(ref(db, "volunteer"));
-      if (!volunteersSnapshot.exists()) {
-        Swal.fire("No Volunteers", "No volunteers found in the database!", "warning");
-        return;
-      }
-  
-      let nearbyVolunteers = [];
-  
-      volunteersSnapshot.forEach((childSnapshot) => {
-        const volunteerData = childSnapshot.val();
-        if (volunteerData.lat && volunteerData.lon) {
-          const distance = getDistance(donorLat, donorLng, volunteerData.lat, volunteerData.lon);
-          if (distance <= 10) { // 🔹 Find volunteers within 10km
-            nearbyVolunteers.push({
-              id: childSnapshot.key,
-              ...volunteerData
-            });
-          }
-        }
-      });
-  
-      if (nearbyVolunteers.length === 0) {
-        Swal.fire("No Nearby Volunteers", "No volunteers available within 10 km radius.", "info");
-        return;
-      }
-  
+    // 🔹 Step 7: Notify Volunteers
     nearbyVolunteers.forEach((volunteer) => {
-      // 🔹 Store volunteer ID under donations/{donationId}/volunteers/{volunteerId}
-      nearbyVolunteers.forEach((volunteer) => {
-        set(ref(db, `donations/${donationId}/pickupRequests/${volunteer.id}`), {
-          status: "Pending", // Volunteer status set to 'Pending'
-        });
+      set(ref(db, `donations/${donationId}/pickupRequests/${volunteer.id}`), {
+        status: "Pending",
       });
 
-      // 🔹 Send notification to the volunteer
       push(ref(db, `notifications/volunteers/${volunteer.id}`), {
         type: "donation",
-        message: `A Recipient near you needs help with delivery. Click to accept.`,
+        message: `A recipient near you needs help with delivery. Click to accept.`,
         donationId,
         createdAt: Date.now(),
-        read: false
+        read: false,
       });
     });
-  
-      await update(donationRef, { status: "Volunteer Assigned" });
-      await Swal.fire({
-        title: "Volunteers Notified!",
-        text: "Nearby volunteers have been notified successfully. You will be updated soon.",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    } catch (error) {
-      console.error("Error requesting volunteer help:", error);
-      Swal.fire("Error", "Something went wrong while requesting volunteer help.", "error");
-    }
-  };
-  
+
+    await update(ref(db, `donations/${donationId}`), { status: "Volunteer Assigned" });
+
+    await Swal.fire({
+      title: "Volunteers Notified!",
+      text: "Nearby volunteers have been notified successfully. You will be updated soon.",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+
+  } catch (error) {
+    console.error("Error requesting volunteer help:", error);
+    Swal.fire("Error", "Something went wrong while requesting volunteer help.", "error");
+  }
+};
 
 const handleMarkAsReceived = async (donationId, donorId, donationData) => {
   try {
