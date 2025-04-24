@@ -796,7 +796,7 @@ const VolunteerTasks = () => {
                   Pickup Confirmed
                 </button>
               )}
-              {item.pickupRequests && item.pickupRequests[auth.currentUser?.uid]?.status === "Picked by Volunteer" && (
+              {item.pickupRequests && item.pickupRequests[auth.currentUser?.uid]?.status === "Picked Up" && item.status === "Picked by Volunteer" && (
                 <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded" onClick={() => foodDelivered(item.id, auth.currentUser?.uid)}>
                   Delivered
                 </button>
