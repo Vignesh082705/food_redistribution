@@ -1,4 +1,4 @@
-import { checkExpiringDonations, checkPendingPickupExpiry } from "./cron-logic";
+import { checkExpiringDonations, checkPendingPickupExpiry } from "../lib/cron-logic";
 
 export default async function handler(req, res) {
   await checkExpiringDonations();

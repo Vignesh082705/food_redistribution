@@ -1,4 +1,4 @@
-import { checkRejectedRequests } from "./cron-logic";
+import { checkRejectedRequests } from "../lib/cron-logic";
 
 export default async function handler(req, res) {
   await checkRejectedRequests();
