@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import arcImage from "../../assets/arc.png";
 
 // Reusable Card Component
 const InfoCard = ({ title, description }) => (
@@ -34,7 +34,11 @@ const Volunteer = () => {
         >
           Volunteer
         </motion.h1>
-          <img src="/src/assets/arc.png" className="w-screen lg:bottom-40 md:bottom-20 bottom-8"></img>
+          <img 
+                    src={arcImage} 
+                    alt="Decorative arc" // ✅ Added alt text for accessibility
+                    className="w-screen lg:bottom-40 md:bottom-20 bottom-8" 
+                  />
       </section>
       <section className="py-10 text-center px-6">
         <h1 className="text-5xl font-extrabold">Become a Volunteer, Make a Difference</h1>

@@ -283,7 +283,7 @@ async function checkPendingPickupExpiry() {
 }
 
 cron.schedule("*/1 * * * *", () => {
-  console.log("Running checkExpiringDonations every 5 minutes...");
+  console.log("Running checkExpiringDonations every minutes...");
   checkExpiringDonations();
   checkRejectedRequests();
   checkPendingPickupExpiry();
